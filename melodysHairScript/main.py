@@ -1,9 +1,24 @@
 from pyautogui import *
+from pynput.mouse import Listener, Button
 import pyautogui
 import time 
 import keyboard
 import win32api, win32con
 
+
+# Function called on a mouse click
+def on_click(x, y, button, pressed):
+    # Check if the left button was pressed
+    if pressed and button == Button.left:
+        # Print the click coordinates
+        print(f'x={x} and y={y}')
+
+
+# Initialize the Listener to monitor mouse clicks
+with Listener(on_click=on_click) as listener:
+    listener.join()
+
+"""
 def click(x, y):
     win32api.SetCursorPos((x,y))
     time.sleep(0.05)
@@ -11,6 +26,8 @@ def click(x, y):
     time.sleep(0.01)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
     win32api.SetCursorPos((100,100))
+
+
 
 while keyboard.is_pressed('u') == False:
     pass
@@ -46,3 +63,4 @@ while keyboard.is_pressed('y') == False:
         click(1174, 479)
         
     
+"""
