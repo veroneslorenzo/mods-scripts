@@ -9,8 +9,6 @@ import win32api, win32con
 positionsX = [];
 positionsY = [];
 r = [];
-g = [];
-b = [];
 i = 0;
 
 choice = 0
@@ -33,8 +31,8 @@ if(not os.path.isfile("coords.txt")):
         print(i+1, ": ")
         with Listener(on_click=on_click) as listener:
             listener.join()
-        f.writelines(str(positionsX[i]))
-        f.writelines(str(positionsY[i]))
+        f.writelines([str(positionsX[i]), "\n"])
+        f.writelines([str(positionsY[i]), "\n"])
     f.close()
 else:
     print("\nPress 1 if you want to recalibrate, anything else if not: ")
@@ -49,14 +47,14 @@ if(choice == 1):
         print(i+1, ": ")
         with Listener(on_click=on_click) as listener:
             listener.join()
-        f.writelines(str(positionsX[i]))
-        f.writelines(str(positionsY[i]))
+        f.writelines([str(positionsX[i]), "\n"])
+        f.writelines([str(positionsY[i]), "\n"])
     f.close()
 else:
-    f = open("coords.txt", "a")
+    f = open("coords.txt", "r")
     for i in range(0, 7):
-        positionsX.append(f.readline())
-        positionsY.append(f.readline())
+        positionsX.append(int(f.readline()[0:-1]))
+        positionsY.append(int(f.readline()[0:-1]))
 
 
 
@@ -68,7 +66,7 @@ def click(x, y):
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
     win32api.SetCursorPos((100,100))
 
-
+print("press u to start the auto clicker\n")
 
 while keyboard.is_pressed('u') == False:
     pass
@@ -76,11 +74,10 @@ while keyboard.is_pressed('u') == False:
 i = 0
 
 for i in range(0,7):
-    red, green, blue = pyautogui.pixel(positionsX[0], positionsY[0])
+    red, green, blue = pyautogui.pixel(positionsX[i], positionsY[i])
     r.append(red);
-    g.append(green);
-    b.append(blue);
 
+print("Tool currently working... press y to stop")
 while keyboard.is_pressed('y') == False:
     
     red, g, b = pyautogui.pixel(positionsX[0], positionsY[0])
