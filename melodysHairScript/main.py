@@ -6,17 +6,29 @@ import keyboard
 import win32api, win32con
 
 
+positionsX = [];
+positionsY = [];
+i = 0;
+
 # Function called on a mouse click
 def on_click(x, y, button, pressed):
     # Check if the left button was pressed
     if pressed and button == Button.left:
         # Print the click coordinates
         print(f'x={x} and y={y}')
+        positionsX.append(x);
+        positionsY.append(y);
+    if not pressed:
+        return False
 
 
-# Initialize the Listener to monitor mouse clicks
-with Listener(on_click=on_click) as listener:
-    listener.join()
+
+print("calibrating, press on each of the blocks so that the program knows where to execute the click\n")
+
+for i in range(0, 7):
+    print(i+1, ": ")
+    with Listener(on_click=on_click) as listener:
+        listener.join()
 
 """
 def click(x, y):
