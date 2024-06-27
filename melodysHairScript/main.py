@@ -13,6 +13,7 @@ g = [];
 b = [];
 i = 0;
 
+choice = 0
 
 # Function called on a mouse click
 def on_click(x, y, button, pressed):
@@ -24,16 +25,38 @@ def on_click(x, y, button, pressed):
         positionsY.append(y);
     if not pressed:
         return False
+    
+if(not os.path.isfile("coords.txt")):
+    f = open("coords.txt", "a")
+    print("calibrating, press on each of the blocks so that the program knows where to execute the click\n")
+    for i in range(0, 7):
+        print(i+1, ": ")
+        with Listener(on_click=on_click) as listener:
+            listener.join()
+        f.writelines(str(positionsX[i]))
+        f.writelines(str(positionsY[i]))
+    f.close()
+else:
+    print("\nPress 1 if you want to recalibrate, anything else if not: ")
+    choice = int(input());
 
-
-
-print("calibrating, press on each of the blocks so that the program knows where to execute the click\n")
-
-for i in range(0, 7):
-    print(i+1, ": ")
-    with Listener(on_click=on_click) as listener:
-        listener.join()
-
+print(choice == 1)
+if(choice == 1):
+    os.remove("coords.txt")
+    f = open("coords.txt", "a")
+    print("calibrating, press on each of the blocks so that the program knows where to execute the click\n")
+    for i in range(0, 7):
+        print(i+1, ": ")
+        with Listener(on_click=on_click) as listener:
+            listener.join()
+        f.writelines(str(positionsX[i]))
+        f.writelines(str(positionsY[i]))
+    f.close()
+else:
+    f = open("coords.txt", "a")
+    for i in range(0, 7):
+        positionsX.append(f.readline())
+        positionsY.append(f.readline())
 
 
 
@@ -60,32 +83,32 @@ for i in range(0,7):
 
 while keyboard.is_pressed('y') == False:
     
-    r, g, b = pyautogui.pixel(positionsX[0], positionsY[0])
-    if r != r[0]:
+    red, g, b = pyautogui.pixel(positionsX[0], positionsY[0])
+    if red != r[0]:
         click(positionsX[0], positionsY[0])
 
-    r, g, b = pyautogui.pixel(positionsX[1], positionsY[1])
-    if r != r[1]:
+    red, g, b = pyautogui.pixel(positionsX[1], positionsY[1])
+    if red != r[1]:
         click(positionsX[1], positionsY[1])
 
-    r, g, b = pyautogui.pixel(positionsX[2], positionsY[2])
-    if r != r[2]:
+    red, g, b = pyautogui.pixel(positionsX[2], positionsY[2])
+    if red != r[2]:
         click(positionsX[2], positionsY[2])
 
-    r, g, b = pyautogui.pixel(positionsX[3], positionsY[3])
-    if r != r[3]:
+    red, g, b = pyautogui.pixel(positionsX[3], positionsY[3])
+    if red != r[3]:
         click(positionsX[3], positionsY[3])
 
-    r, g, b = pyautogui.pixel(positionsX[4], positionsY[4])
-    if r != r[4]:
+    red, g, b = pyautogui.pixel(positionsX[4], positionsY[4])
+    if red != r[4]:
         click(positionsX[4], positionsY[4])
 
-    r, g, b = pyautogui.pixel(positionsX[5], positionsY[5])
-    if r != r[5]:
+    red, g, b = pyautogui.pixel(positionsX[5], positionsY[5])
+    if red != r[5]:
         click(positionsX[5], positionsY[5])
 
-    r, g, b = pyautogui.pixel(positionsX[6], positionsY[6])
-    if r != r[6]:
+    red, g, b = pyautogui.pixel(positionsX[6], positionsY[6])
+    if red != r[6]:
         click(positionsX[6], positionsY[6])
         
     
