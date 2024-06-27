@@ -8,7 +8,11 @@ import win32api, win32con
 
 positionsX = [];
 positionsY = [];
+r = [];
+g = [];
+b = [];
 i = 0;
+
 
 # Function called on a mouse click
 def on_click(x, y, button, pressed):
@@ -30,7 +34,9 @@ for i in range(0, 7):
     with Listener(on_click=on_click) as listener:
         listener.join()
 
-"""
+
+
+
 def click(x, y):
     win32api.SetCursorPos((x,y))
     time.sleep(0.05)
@@ -44,35 +50,42 @@ def click(x, y):
 while keyboard.is_pressed('u') == False:
     pass
 
+i = 0
+
+for i in range(0,7):
+    red, green, blue = pyautogui.pixel(positionsX[0], positionsY[0])
+    r.append(red);
+    g.append(green);
+    b.append(blue);
+
 while keyboard.is_pressed('y') == False:
     
-    r, g, b = pyautogui.pixel(743, 424)
-    if r == 141 and g == 69 and b == 94:
-        click(741, 480)
+    r, g, b = pyautogui.pixel(positionsX[0], positionsY[0])
+    if r != r[0]:
+        click(positionsX[0], positionsY[0])
 
-    r, g, b = pyautogui.pixel(816, 424)
-    if r == 106 and g == 80 and b == 12:
-        click(814, 477)
+    r, g, b = pyautogui.pixel(positionsX[1], positionsY[1])
+    if r != r[1]:
+        click(positionsX[1], positionsY[1])
 
-    r, g, b = pyautogui.pixel(888, 424)
-    if r == 44 and g == 76 and b == 10:
-        click(886, 478)
+    r, g, b = pyautogui.pixel(positionsX[2], positionsY[2])
+    if r != r[2]:
+        click(positionsX[2], positionsY[2])
 
-    r, g, b = pyautogui.pixel(960, 424)
-    if r == 33 and g == 43 and b == 14:
-        click(958, 480)
+    r, g, b = pyautogui.pixel(positionsX[3], positionsY[3])
+    if r != r[3]:
+        click(positionsX[3], positionsY[3])
 
-    r, g, b = pyautogui.pixel(1032, 424)
-    if r == 47 and g == 15 and b == 70:
-        click(1030, 479)
+    r, g, b = pyautogui.pixel(positionsX[4], positionsY[4])
+    if r != r[4]:
+        click(positionsX[4], positionsY[4])
 
-    r, g, b = pyautogui.pixel(1103, 424)
-    if r == 29 and g == 31 and b == 92:
-        click(1101, 480)
+    r, g, b = pyautogui.pixel(positionsX[5], positionsY[5])
+    if r != r[5]:
+        click(positionsX[5], positionsY[5])
 
-    r, g, b = pyautogui.pixel(1176, 424)
-    if r == 19 and g == 67 and b == 90:
-        click(1174, 479)
+    r, g, b = pyautogui.pixel(positionsX[6], positionsY[6])
+    if r != r[6]:
+        click(positionsX[6], positionsY[6])
         
     
-"""
